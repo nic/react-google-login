@@ -13,7 +13,7 @@ class GoogleLogin extends Component {
     cookiePolicy: PropTypes.string,
     loginHint: PropTypes.string,
     hostedDomain: PropTypes.string,
-    children: React.PropTypes.node,
+    buttonWrapper: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -115,7 +115,10 @@ class GoogleLogin extends Component {
       fontWeight: 'bold',
       fontFamily: 'Roboto',
     };
-    const { className, buttonText, children } = this.props;
+    const { className, buttonText, children, buttonWrapper } = this.props;
+    if(buttonWrapper === false) {
+      return children({ fetching: this.state.disabled !== '', handle: this.onBtnClick })
+    }
     return (
       <button
         className={ className }
